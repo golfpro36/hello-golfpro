@@ -24,7 +24,7 @@
   </div>
   <script>
     // แสดงว่าเปิดแบบเว็บธรรมดา หรือแบบแอปที่ติดตั้งแล้ว
-    var installed = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    var installed = ['standalone','minimal-ui','window-controls-overlay','fullscreen'].some(function (m) { return window.matchMedia('(display-mode: ' + m + ')').matches; }) || window.navigator.standalone;
     document.getElementById('mode').textContent = installed ? '✅ โหมดแอป (ติดตั้งแล้ว)' : '🌐 โหมดเว็บ (ยังไม่ได้ติดตั้ง)';
     // 3) ลงทะเบียน service worker (ทำให้ Android เสนอปุ่ม "ติดตั้งแอป")
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
